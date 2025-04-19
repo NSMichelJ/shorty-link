@@ -40,52 +40,51 @@ import { MonitorCog, Moon, Sun } from "@lucide/astro";
 </div>
 
 <script>
-  function setTheme(theme: string) {
-    if (theme === "light") {
-      localStorage.theme = "light";
-    } else if (theme === "dark") {
-      localStorage.theme = "dark";
-    } else {
-      localStorage.removeItem("theme");
+  document.addEventListener("astro:page-load", () => {
+    function applyTheme(theme: string) {
+      document.documentElement.classList.remove("light", "dark");
+
+      if (theme === "system") {
+        // Detectar el tema del sistema
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        document.documentElement.classList.add(systemTheme);
+      } else {
+        document.documentElement.classList.add(theme);
+      }
+
+      updateButtonStates(theme);
+
+      localStorage.setItem("theme", theme);
     }
-    document.documentElement.classList.toggle(
-      "dark",
-      localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-    );
-    markSelected(theme);
-  }
 
-  function markSelected(theme: string) {
-    document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
-      btn.setAttribute(
-        "data-selected",
-        btn.getAttribute("data-theme") === theme ? "true" : "false"
-      );
-    });
-  }
-
-  function initThemeToggle() {
-    let theme = localStorage.theme || "system";
-    setTheme(theme);
-
-    document.querySelectorAll(".theme-toggle-btn").forEach((btn) => {
-      btn.addEventListener("click", () =>
-        setTheme(btn?.getAttribute("data-theme") || "light")
-      );
-    });
-
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", () => {
-        if (!("theme" in localStorage)) setTheme("system");
+    function updateButtonStates(selectedTheme: string) {
+      const buttons = document.querySelectorAll(".theme-toggle-btn");
+      buttons.forEach((button) => {
+        const buttonTheme = button.getAttribute("data-theme");
+        if (buttonTheme === selectedTheme) {
+          button.setAttribute("data-selected", "true");
+        } else {
+          button.removeAttribute("data-selected");
+        }
       });
-  }
+    }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initThemeToggle);
-  } else {
-    initThemeToggle();
-  }
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem("theme") || "system";
+      applyTheme(savedTheme);
+    }
+
+    const buttons = document.querySelectorAll(".theme-toggle-btn");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const theme = button.getAttribute("data-theme") || "system";
+        applyTheme(theme);
+      });
+    });
+
+    initializeTheme();
+  });
 </script>
