@@ -1,0 +1,29 @@
+---
+import { ArrowBigRightDash } from "@lucide/astro";
+
+import GitHubLogo from "@/assets/github.svg";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+---
+
+<header>
+  <div class="mx-auto flex max-w-7xl items-center justify-between p-4">
+    <span class="text-xl font-bold uppercase">Shorty-Link</span>
+
+    <div class="flex items-center justify-center gap-2">
+      <ThemeToggle />
+
+      <ButtonLink
+        href="https://github.com/NSMichelJ/shorty-link"
+        target="_blank"
+        class="bg-slate-800 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-900"
+      >
+        <GitHubLogo width={18} height={18} />
+      </ButtonLink>
+
+      <ButtonLink href="/auth">
+        Get Started Now! <ArrowBigRightDash size={18} />
+      </ButtonLink>
+    </div>
+  </div>
+</header>
