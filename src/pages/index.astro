@@ -1,11 +1,31 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { Link } from "@lucide/astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import GitHubLogo from "@/assets/github.svg";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import Layout from "@/layouts/Layout.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Shorty-link | URL SHortener">
+  <div class="mx-auto mt-44 w-4xl text-center">
+    <h1 class="mb-4 text-5xl font-bold">The best and fastest URL shortener</h1>
+    <p class="mb-8 text-xl">
+      Shorty-Link is an open-source URL shortener that simplifies sharing long
+      links. Intuitive, fast, and customizable.
+    </p>
+
+    <div class="flex items-center justify-center gap-4">
+      <ButtonLink href="/dashboard">
+        <Link size={18} /> Shorten Your First Link
+      </ButtonLink>
+
+      <ButtonLink
+        href="https://github.com/NSMichelJ/shorty-link"
+        target="_blank"
+        class="bg-slate-800 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-900"
+      >
+        <GitHubLogo width={18} height={18} /> Contribute with a Star
+      </ButtonLink>
+    </div>
+  </div>
 </Layout>

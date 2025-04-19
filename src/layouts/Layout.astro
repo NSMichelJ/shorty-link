@@ -1,22 +1,47 @@
+---
+interface Props {
+  title: string;
+}
+
+import Footer from "@/components/lauyout/Footer.astro";
+import Header from "@/components/lauyout/Header.astro";
+import "@/styles/global.css";
+
+const { title } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-gray-800 dark:bg-gray-800 dark:text-white">
+    <div class="background flex h-screen flex-col">
+      <Header />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+  <style>
+    .background {
+      background-image:
+        radial-gradient(
+          at 10% 10%,
+          hsla(203, 91%, 66%, 0.5) 0px,
+          transparent 65%
+        ),
+        radial-gradient(
+          at 90% 90%,
+          hsla(257, 91%, 66%, 0.5) 0px,
+          transparent 65%
+        );
+    }
+  </style>
+</html>
