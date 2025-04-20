@@ -9,14 +9,16 @@ export const prerender = true;
 ---
 
 <Layout title="Shorty-link | URL SHortener">
-  <div class="mx-auto mt-44 w-4xl text-center">
-    <h1 class="mb-4 text-5xl font-bold">The best and fastest URL shortener</h1>
-    <p class="mb-8 text-xl">
+  <div class="mx-auto mt-44 w-full max-w-4xl px-8 text-center">
+    <h1 class="mb-4 text-4xl font-bold sm:text-5xl">
+      The best and fastest URL shortener
+    </h1>
+    <p class="mb-8 text-base sm:text-xl">
       Shorty-Link is an open-source URL shortener that simplifies sharing long
       links. Intuitive, fast, and customizable.
     </p>
 
-    <div class="flex items-center justify-center gap-4">
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
       <ButtonLink href="/dashboard">
         <Link size={18} /> Shorten Your First Link
       </ButtonLink>
