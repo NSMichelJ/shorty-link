@@ -19,6 +19,7 @@ import GoogleLogo from "@/assets/google.svg";
         type="button"
         id="google-signin"
         class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+        data-provider="google"
       >
         <GoogleLogo width={18} height={18} />
         Continue with Google
@@ -27,6 +28,7 @@ import GoogleLogo from "@/assets/google.svg";
         type="button"
         id="github-signin"
         class="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700"
+        data-provider="github"
       >
         <GitHubLogo width={18} height={18} />
         Continue with GitHub
@@ -34,3 +36,19 @@ import GoogleLogo from "@/assets/google.svg";
     </div>
   </div>
 </Layout>
+
+<script>
+  import { socialSignIn } from "@/lib/auth-client";
+  import type { SocialProvider } from "@/types/provider";
+
+  const sigInButtons = document.querySelectorAll("[data-provider]");
+
+  sigInButtons.forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const provider = button.getAttribute("data-provider") || "google";
+      await socialSignIn(provider as SocialProvider);
+    });
+  });
+</script>
