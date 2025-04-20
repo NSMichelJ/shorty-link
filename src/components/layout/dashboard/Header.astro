@@ -1,0 +1,32 @@
+---
+import GitHubLogo from "@/assets/github.svg";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import ThemeToggle from "@/components/ui/ThemeToggle.astro";
+import { Menu } from "@lucide/astro";
+---
+
+<header
+  class="dark:bg-dark-700 flex h-[60px] flex-shrink-0 border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900"
+>
+  <div class="flex w-full items-center justify-between gap-2 px-4 py-2">
+    <div>
+      <button
+        id="sidebar-toggle"
+        type="button"
+        class="cursor-pointer md:hidden"
+      >
+        <Menu />
+      </button>
+    </div>
+    <div class="flex items-center justify-end gap-2">
+      <ThemeToggle />
+      <ButtonLink
+        href="https://github.com/NSMichelJ/shorty-link"
+        target="_blank"
+        class="bg-slate-800 hover:bg-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700"
+      >
+        <GitHubLogo width={18} height={18} />
+      </ButtonLink>
+    </div>
+  </div>
+</header>
