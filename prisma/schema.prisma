@@ -26,6 +26,8 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  Link Link[]
+
   @@unique([email])
   @@map("user")
 }
@@ -75,4 +77,21 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+model Link {
+  id          String    @id @default(cuid())
+  slug        String    @default(cuid())
+  originalUrl String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  clicks      Int       @default(0)
+  expiresAt   DateTime?
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([slug])
+  @@index([slug])
+  @@index([userId])
+  @@map("link")
 }
