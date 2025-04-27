@@ -32,6 +32,9 @@ export const onRequest = defineMiddleware(async (context, next) => {
     });
 
     if (link) {
+      if (link.expiresAt && link.expiresAt < new Date()) {
+        return new Response("Link expired", { status: 400 });
+      }
       return context.redirect(link.originalUrl);
     }
   }
