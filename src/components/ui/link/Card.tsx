@@ -56,6 +56,7 @@ export default function LinkCard({ link }: { link: Link }) {
           <a
             href={originalUrl}
             className="flex cursor-pointer items-center gap-2 text-gray-800 underline dark:text-gray-300"
+            target="_blank"
           >
             <SquareArrowOutUpRight size={18} className="no-underline" />
             {originalUrl}
