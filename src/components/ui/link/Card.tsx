@@ -17,7 +17,7 @@ export default function LinkCard({ link }: { link: Link }) {
 
   const copyShortLink = (slug: string) => {
     const origin = window.location.origin;
-    navigator.clipboard.writeText(`${origin}/${slug}`);
+    navigator.clipboard.writeText(`${origin}/s/${slug}`);
   }
 
   const deleteLink = async (id: string) => {

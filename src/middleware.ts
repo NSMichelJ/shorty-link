@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { defineMiddleware } from "astro:middleware";
+import { prisma } from "./lib/db";
 
 export const onRequest = defineMiddleware(async (context, next) => {
   const isAuthed = await auth.api.getSession({
@@ -20,6 +21,19 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
   if (context.url.pathname.startsWith("/dashboard") && !isAuthed) {
     return context.redirect("/auth");
+  }
+
+  if (context.url.pathname.startsWith("/s/")) {
+    const slug = context.url.pathname.slice(3);
+    const link = await prisma.link.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (link) {
+      return context.redirect(link.originalUrl);
+    }
   }
 
   return next();
