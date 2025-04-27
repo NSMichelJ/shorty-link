@@ -35,6 +35,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
       if (link.expiresAt && link.expiresAt < new Date()) {
         return new Response("Link expired", { status: 400 });
       }
+
+      await prisma.link.update({
+        where: {
+          slug,
+        },
+        data: {
+          clicks: {
+            increment: 1,
+          },
+        },
+      });
+
       return context.redirect(link.originalUrl);
     }
   }
