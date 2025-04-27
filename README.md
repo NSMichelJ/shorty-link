@@ -1,48 +1,79 @@
-# Astro Starter Kit: Basics
+# Shorty-link: URL shortener 🚀
 
-```sh
-pnpm create astro@latest -- --template basics
+**Built with Astro, React, Tailwind, and Server Actions**  
+
+![Home Preview](./public/home-preview.jpg)
+
+> **Shorty-Link is an open-source URL shortener that simplifies sharing long links. Intuitive, fast, and customizable.**
+
+
+## Tech Stack 🛠️  
+- **Frontend**: React + Tailwind CSS  
+- **Backend**: Astro (SSG/SSR) + Server Actions  
+- **Auth**: better-auth (OAuth with GitHub/Google)  
+- **Icons**: lucide-react  
+- **Database**:  
+  - **Production**: [Turso](https://turso.tech) (SQLite as a service)  
+  - **Local Development**: SQLite  
+- **ORM**: Prisma  
+
+## Setup 📦  
+
+### 1. Fork this project
+[Fork this project](https://github.com/NSMichelJ/shorty-link/fork)  
+
+### 2. Clone the Repo
+```bash  
+git clone git@github.com:YOUR_USER/shorty-link.git 
+cd shorty-link
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+### 3. Install Dependencies
+```bash
+pnpm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### 4. Environment Variables
+The project includes a .env.template file as a template for your environment variables. 
+1. Copy the .env.template file to a new .env file
+2. Open the .env file and fill in the required values
+```bash
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
 
-## 🧞 Commands
+DATABASE_URL="file:dev.sqlite3"
+TURSO_DATABASE_URL=
+TURSO_AUTH_TOKEN=
 
-All commands are run from the root of the project, from a terminal:
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+> Note : If you don't provide Turso credentials (TURSO_DATABASE_URL and TURSO_AUTH_TOKEN), the app will automatically use SQLite (file:dev.sqlite3) as the database. 
 
-## 👀 Want to learn more?
+### 5. Set Up Prisma
+Run the following commands to set up your database schema and migrations:
+```bash
+pnpm db:generate
+pnpm db:migrate
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### 6. Run Locally
+Start the development server:
+```bash
+pnpm dev
+```
+
+## Usage 📏
+* Sign Up/Login via GitHub/Google.
+* Shorten a URL: Click "Create link" and paste the long link.
+* Copy & Share : Use the generated short link.
+* Dashboard : Track clicks, edit URLs, or delete links.
+
+## Contributing 🤝
+Pull requests are welcome! For major changes, open an issue first.
+
+### License 📄
+This project is licensed under the MIT License - See [LICENSE](./LICENSE) for details.
